@@ -1,0 +1,196 @@
+/*
+
+Tooplate 2126 Antique Cafe
+
+https://www.tooplate.com/view/2126-antique-cafe
+
+*/
+
+
+.declare {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+
+
+p a {
+	color: #FF6;
+}
+
+p a:hover {
+	color: #9FF;
+}
+
+
+
+
+
+.input:focus {
+    outline: none !important;
+    border:1px solid #CC9966;
+    box-shadow: 0 0 10px #b67533;
+}
+
+input::placeholder,
+textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(214, 212, 212);
+    opacity: 1; /* Firefox */
+}
+  
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(214, 212, 212);
+}
+  
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(214, 212, 212);
+}
+
+
+
+#article-1{
+    background-image: url('../images/backmusic.webp');
+    height: 40vh;
+    text-align: center;
+}
+
+/*  */
+
+
+
+  
+/*  */
+
+.row {
+    align-self: centers;
+}
+
+
+.intro {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+    border: 20px;
+    margin-left: 10%;
+    margin-right: 20%;
+}
+
+li {
+    text-decoration: none;
+}
+
+ul{
+    text-decoration: none;
+    list-style: none;
+}
+
+#info {
+    text-align: center;
+    border: 20%;
+    margin: 20%;
+}
+
+#moreinfo {
+    border: 10%;
+    margin: 10%;
+}
+
+button {
+    border-radius: 10px;
+    color: black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+.boody {
+    transition: opacity 1s;
+    background-color:antiquewhite;
+}
+
+.display-4 {
+    font-family: 'Raleway', sans-serif;
+    padding-top: 10%;
+}
+
+.text{
+    text-align: center;
+    padding-left: 20%;
+    padding-right: 20%;
+    font-size: xx-large;
+    transition: width 2s linear 5s;
+
+}
+
+p {
+    text-decoration: dashed;
+}
+
+
+a {
+    text-decoration: dashed;
+    color: rgba(0,0,0,0.7);
+}
+
+a :hover{
+    color: slategrey;
+}
+
+a :active {
+    color: black;
+}
+
+.foot {
+    background-color:black;    
+    color: white;
+    padding: 30px;
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+}
+
+
+@media (min-width: 768px) {
+    .boody {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .foot {
+        width: auto;
+        right: 0;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 639px) {
+    .parallax-window {
+        min-height: 600px;
+    }
+}
+
+@media (max-width: 370px) {
+    .tm-menu-item {
+        flex-direction: column;
+    }
+
+    .tm-menu-item-2 {
+        flex-direction: column-reverse;
+    }
+
+    .tm-menu-item img {
+        margin-bottom: 10px;
+    }
+
+    .tm-menu-item-2 img {
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+    <script src="{% static 'javascripts/index.js' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+
+<body class="boody">
+        <article id="article-1">
+            <h6 class="display-4">Welcome</h1>
+        </article>
+        <div class="text" >
+            <form>
+                <div>Prediction Journey!</div>
+                <button type="button" onclick="cl()">Get Started</button>
+            </form>
+        </div>
+        <div class="intro">
+          <h6>
+
+            <p>This is a project developed by Shayan Behzad written in python Django framework.
+            </p>
+            <p> I scraped data from <a href=https://bama.ir/ style="color: black">bama</a> and inserted the data into the database.</p>
+              <p>Then the scraped data was cleaned as the dataset of the Ml-Poroject.</p>
+              <p>
+                The dataset is analyzed by the RandomForestRegressor algorithm.</p>
+                <p>  If you give the specifications of your car, it will predict the approximate price of your car.
+              </p> 
+          </h5>
+        </div>
+        <form method="POST" action="{% url 'handle_choice' %}" id="info">
+        {% csrf_token %}
+        {% if messages %}
+            <ul class="messages" >
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="border-color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="row">
+            <div class="col" >
+                <select class="form-select" name="choice" id="name" aria-label="Default select example" required>
+                    <option value='' selected>Choose your car</option>
+                    {% for i in cars %}
+                        <option value ="{{ forloop.counter }}">{{ i }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="col">
+                <select class="form-select" name="trim" id="trim" aria-label="Default select example" required>
+                    <option selected>Choose your car's trim </option>
+                    {% for i in trims %}
+                        <option value="{{ loop.index }}"> تیپ {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="mileage" placeholder="mileage">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="model" placeholder="model">
+            </div>
+        </div>
+        <div>
+          <button class="btn btn-primary" type="submit" style="float: left; margin-top: 5px">predict</button>
+        </div>
+        <p> </p>
+    </form>
+  </body>
+
+
+<footer class="foot">
+  <ul>
+    <li>
+      <label>name: </label>
+      <div>Shayan Behzad</div>
+    </li>
+    <li>
+      <label>Email: </label>
+      <div>shayan.behzad1380@gmail.com</div>
+    </li>
+    <li>
+      <label>Github Link: </label>
+      <div><a href=https://github.com/ShayanBehzad>Git</div>
+    </li>
+
+  </ul>
+
+</footer>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var categorySelect = $('#name');
+            var optionSelect = $('#trim');
+  
+            categorySelect.on('change', function() {
+              var selectedCategory = categorySelect.val();
+              optionSelect.empty();
+              const ls1 = ['تیپ 2', 'تیپ 6', 'تیپ 5', 'تیپ 3']
+              const ls2 = ['E0','E1', 'E2', 'اتوماتیک', 'پلاس دنده ای', 'پلاس اتوماتیک']
+              const ls3 = ['SL', 'LE', 'SX', 'TL', 'EX', 'SE']
+              // Add default option to the second select box
+              optionSelect.append($('<option>', {
+                value: '',
+                text: 'Select an option'
+              }));
+          
+              // Check the selected option in the first select box
+              if (selectedCategory === '1') {
+                // Add options 1-5 to the second select box
+                for (var i = 0; i <= 3; i++) {
+                  optionSelect.append($('<option>', {
+                    value: i,
+                    text: ls1[i]
+                  }));
+                }
+              } else if (selectedCategory === '2') {
+                // Add options 6-8 to the second select box
+                for (var i = 0; i <= 5; i++) {
+                  optionSelect.append($('<option>', {
+                    value: i,
+                    text: ls2[i]
+                  }));
+                }
+              } else if (selectedCategory >= '3') {
+                // Add options 6-8 to the second select box
+                for (var i = 0; i <= 5; i++) {
+                  optionSelect.append($('<option>', {
+                    value: i,
+                    text: ls3[i]
+                  }));
+                }
+              } else {
+                // Fetch options based on selected category using AJAX
+                $.ajax({
+                  url: '/info/',
+                  data: {
+                    category: selectedCategory
+                  },
+                  dataType: 'json',
+                  success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                      optionSelect.append($('<option>', {
+                        value: data[i].pk,
+                        text: data[i].fields.name
+                      }));
+                    }
+                  }
+                });
+              }
+            });
+          });
+    </script>
+
+</html>
