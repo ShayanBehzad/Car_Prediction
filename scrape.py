@@ -1,3 +1,6 @@
+# Use this module to update the dataset
+
+
 import mysql.connector
 import requests
 import pandas
@@ -23,8 +26,6 @@ def scrape(inp):
     c = 0
     PATH = 'C:\Program Files (x86)\chromedriver.exe'
     driver = webdriver.Chrome()
-    # driver.get('https://bama.ir/car?priced=1')
-    # https://bama.ir/car?brand=renault,tondar90&brand=peugeot,206ir(type2,type3panorama,type5,type6)
     driver.get('https://bama.ir/car?brand=pride&brand=renault,tondar90&brand=peugeot,206ir(type2,type3,type3panorama,type5,type6)&priced=1')
 
     time.sleep(1)
@@ -40,11 +41,6 @@ def scrape(inp):
     els = driver.find_elements(By.CLASS_NAME, "bama-ad__title")
     time.sleep(1)
     det = driver.find_elements(By.CLASS_NAME,'bama-ad__detail-row')
-    # for j in range(len(det)):
-    #     if 'پیش' in prices[j].text:
-    #         prices.remove(prices[j])
-    #         els.remove(els[j])
-    #         det.remove(det[j])
     for i in range(len(det)):
         s = det[i].text.split()
 
@@ -87,13 +83,15 @@ def scrape(inp):
     pass
 
 
-# cleaning data for 206
+# cleaning data for 206 
 
 def peju206():
     c = 0
     id = []
-    mycursor.execute('DROP TABLE polls_p206_c')
+    # drop the migration made table
+    mycursor.execute('DROP TABLE IF EXISTS polls_p206_c')
     bb = mycursor.fetchall()
+    # create the table again to insert cleaned data
     mycursor.execute(
         "CREATE TABLE polls_p206_c (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mileage INT, model INT, trim INT, price INT)")
     Q = mycursor.fetchall()
@@ -134,7 +132,7 @@ def peju206():
         except :
             tr = 0
 
-
+        # insert the cleaned data
         mycursor.execute("INSERT INTO polls_p206_c (name, mileage, model, trim, price) VALUES ('پژو، 206', '%s', '%s', '%s', '%s');" % ((int(ml)), (int(m[0][0]) - 1380) , int(tr) * 100, int(k[0][0].split(',')[0])))
 
         mydb.commit()
@@ -146,8 +144,9 @@ def peju206():
 def l90():
     c = 0
     id = []
-    mycursor.execute('DROP TABLE polls_l90_c')
+    mycursor.execute('DROP TABLE IF EXISTS polls_l90_c')
     bb = mycursor.fetchall()
+    # create the table again to insert cleaned data
     mycursor.execute(
         "CREATE TABLE polls_l90_c (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mileage INT, model INT, trim INT, price INT)")
     Q = mycursor.fetchall()
@@ -192,7 +191,7 @@ def l90():
         except :
             tr = 0
 
-
+        # insert the cleaned data
         mycursor.execute("INSERT INTO polls_l90_c (name, mileage, model, trim, price) VALUES ('رنو، تندر 90', '%s', '%s', '%s', '%s');" % ((int(ml)), (int(m[0][0]) - 1385) , int(tr) * 100, int(k[0][0].split(',')[0])))
 
         mydb.commit()
@@ -204,8 +203,9 @@ def l90():
 def pride():
     c = 0
     id = []
-    mycursor.execute('DROP TABLE polls_pride_c')
+    mycursor.execute('DROP TABLE IF EXISTS polls_pride_c')
     bb = mycursor.fetchall()
+    # create the table again to insert cleaned data
     mycursor.execute(
         "CREATE TABLE polls_pride_c (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mileage INT, model INT, trim INT, price INT)")
     Q = mycursor.fetchall()
@@ -339,7 +339,7 @@ def pride():
             div = 2
             tr = 3 + 2
 
-
+        # insert the cleaned data
         mycursor.execute(
             "INSERT INTO polls_pride_c (name, mileage, model, trim, price) VALUES ('pride', '%s', '%s', '%s', '%s');" % (
             (int(ml)), (int(m[0][0]) - 1372), int(tr) * 10, int(k[0][0].split(',')[0])))
