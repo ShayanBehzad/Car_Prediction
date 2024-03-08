@@ -1,9 +1,11 @@
 
-This is a project written in Python Django Framework.
-I scraped data from https://bama.ir/ and inserted the data into the database (by scrape.py module).
-Then the scraped data was cleaned as the dataset of the Ml-Poroject.
-The dataset is analyzed by the RandomForestRegressor algorithm.
-If you give the specifications of your car, it will predict the approximate price of your car.
-To update the dataset run the scrape.py module.
+# Car Price Prediction with Django and Machine Learning
+Welcome to our project, a cutting-edge application designed to predict the price of cars based on their specifications. Leveraging the power of Python's Django framework and machine learning algorithms, we've created a user-friendly website that not only provides a prediction service but also showcases the underlying technology.
+
+# Features
+- Data Scraping and Cleaning: Automatically scrapes data from Bama.ir and processes it into a clean, machine-readable dataset.
+- Machine Learning Model: Utilizes the RandomForestRegressor algorithm to analyze the dataset and predict car prices with high accuracy.
+- Web Interface: A user-friendly website built with Django, allowing users to input car specifications and receive a price prediction instantly.
+
 
 Explaiend Project in YouTube: https://www.youtube.com/watch?v=Iiv8YwjqKQU
