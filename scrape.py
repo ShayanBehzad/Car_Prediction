@@ -22,12 +22,11 @@ mycursor = mydb.cursor()
 # scraping
 
 def scrape(inp):
-    # part 1 scraping
+    # scrape bama.ir
     c = 0
     PATH = 'C:\Program Files (x86)\chromedriver.exe'
     driver = webdriver.Chrome()
     driver.get('https://bama.ir/car?brand=pride&brand=renault,tondar90&brand=peugeot,206ir(type2,type3,type3panorama,type5,type6)&priced=1')
-
     time.sleep(1)
     for o in range(inp):
         f = o * 1080
@@ -42,6 +41,8 @@ def scrape(inp):
     time.sleep(1)
     det = driver.find_elements(By.CLASS_NAME,'bama-ad__detail-row')
     for i in range(len(det)):
+        a = 0
+        b = 0
         s = det[i].text.split()
 
         # defining car's details
@@ -51,9 +52,6 @@ def scrape(inp):
         mileage = s[1] + ' ' + s[2]
         trim = ' '.join(s[3:])
         details = (name, mileage, model, trim)
-
-        a = 0
-        b = 0
         mycursor.execute("SHOW TABLES;")
         one = mycursor.fetchall()
 
@@ -102,6 +100,8 @@ def peju206():
         c += 1
 
     for i in range(c):
+        tr = ''
+        ml = ''
         mycursor.execute("SELECT mileage FROM car WHERE id = %i" % id[i])
         p = mycursor.fetchall()
         mycursor.execute("SELECT trim FROM car WHERE id = %i" % id[i])
@@ -111,8 +111,6 @@ def peju206():
         mycursor.execute("SELECT model FROM car WHERE id = %i" % id[i])
         m = mycursor.fetchall()
 
-        tr = ''
-        ml = ''
         if 'صفر' in p[0][0].split():
             ml = 0
         elif 'کارکرده' in p[0][0].split():
@@ -140,7 +138,6 @@ def peju206():
 
 
 # cleaning data for l90
-
 def l90():
     c = 0
     id = []
@@ -157,6 +154,8 @@ def l90():
         c += 1
 
     for i in range(c):
+        tr = 200
+        ml = ''
         mycursor.execute("SELECT mileage FROM car WHERE id = %i" % id[i])
         p = mycursor.fetchall()
         mycursor.execute("SELECT trim FROM car WHERE id = %i" % id[i])
@@ -166,8 +165,6 @@ def l90():
         mycursor.execute("SELECT model FROM car WHERE id = %i" % id[i])
         m = mycursor.fetchall()
 
-        tr = 200
-        ml = ''
         if 'صفر' in p[0][0].split():
             ml = 0
         elif 'کارکرده' in p[0][0].split():
@@ -199,7 +196,6 @@ def l90():
     pass
 
 # cleaning data for pride
-
 def pride():
     c = 0
     id = []
@@ -216,6 +212,9 @@ def pride():
         c += 1
 
     for i in range(c):
+        div = ''
+        tr = 200
+        ml = ''
         mycursor.execute("SELECT name FROM car WHERE id = %i" % id[i])
         n = mycursor.fetchall()
         mycursor.execute("SELECT mileage FROM car WHERE id = %i" % id[i])
@@ -226,9 +225,6 @@ def pride():
         k = mycursor.fetchall()
         mycursor.execute("SELECT model FROM car WHERE id = %i" % id[i])
         m = mycursor.fetchall()
-        div = ''
-        tr = 200
-        ml = ''
         if 'صفر' in p[0][0].split():
             ml = 0
         elif 'کارکرده' in p[0][0].split():
@@ -237,7 +233,6 @@ def pride():
             ml = p[0][0].split()[0].split(',')[0]
 
         try:
-
             if '111' in n[0][0]:
                 if 'SE' in t[0][0]:
                     tr = 6 + 5
@@ -354,9 +349,4 @@ pride()
 peju206()
 l90()
 
-
-# try:
-#     main = WebDriverWait(els,5).until(EC.presence_of_element_located(By.CLASS_NAME,'kt-page-title__title kt-page-title__title--responsive-sized'))
-# except:
-#     driver.quit()
 
