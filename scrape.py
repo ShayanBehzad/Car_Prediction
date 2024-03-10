@@ -26,7 +26,9 @@ def scrape(inp):
     c = 0
     PATH = 'C:\Program Files (x86)\chromedriver.exe'
     driver = webdriver.Chrome()
-    driver.get('https://bama.ir/car?brand=pride&brand=renault,tondar90&brand=peugeot,206ir(type2,type3,type3panorama,type5,type6)&priced=1')
+    driver.get(
+        'https://bama.ir/car?brand=pride&brand=renault,tondar90&brand=peugeot,206ir(type2,type3,type3panorama,type5,type6)&priced=1'
+        )
     time.sleep(1)
     for o in range(inp):
         f = o * 1080
@@ -60,7 +62,9 @@ def scrape(inp):
             if i == ('car',):
                 a += 1
         if a == 0:
-            mycursor.execute("CREATE TABLE car (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50),mileage VARCHAR(100),model VARCHAR(30),trim VARCHAR(100), price VARCHAR(100));")
+            mycursor.execute(
+                "CREATE TABLE car (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50),mileage VARCHAR(100),model VARCHAR(30),trim VARCHAR(100), price VARCHAR(100));"
+                )
             two = mycursor.fetchall()
 
         # check if the data is repetitious
@@ -71,7 +75,9 @@ def scrape(inp):
                 b += 1
         if b == 0:
             # inserting data into table
-            mycursor.execute("INSERT INTO car(name, mileage, model, trim, price) VALUES ('%s', '%s', '%s', '%s', '%s');" % (name, mileage, model, trim, price))
+            mycursor.execute(
+                "INSERT INTO car(name, mileage, model, trim, price) VALUES ('%s', '%s', '%s', '%s', '%s');" % (name, mileage, model, trim, price)
+                )
             four = mycursor.fetchall()
 
         mydb.commit()
@@ -131,7 +137,10 @@ def peju206():
             tr = 0
 
         # insert the cleaned data
-        mycursor.execute("INSERT INTO polls_p206_c (name, mileage, model, trim, price) VALUES ('پژو، 206', '%s', '%s', '%s', '%s');" % ((int(ml)), (int(m[0][0]) - 1380) , int(tr) * 100, int(k[0][0].split(',')[0])))
+        mycursor.execute(
+            "INSERT INTO polls_p206_c (name, mileage, model, trim, price) VALUES ('پژو، 206', '%s', '%s', '%s', '%s');"
+              % ((int(ml)), (int(m[0][0]) - 1380) , int(tr) * 100, int(k[0][0].split(',')[0]))
+            )
 
         mydb.commit()
         pass
@@ -145,9 +154,12 @@ def l90():
     bb = mycursor.fetchall()
     # create the table again to insert cleaned data
     mycursor.execute(
-        "CREATE TABLE polls_l90_c (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mileage INT, model INT, trim INT, price INT)")
+        "CREATE TABLE polls_l90_c (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mileage INT, model INT, trim INT, price INT)"
+        )
     Q = mycursor.fetchall()
-    mycursor.execute("SELECT id,trim,model,mileage,price FROM car WHERE name = 'رنو، تندر 90';")
+    mycursor.execute(
+        "SELECT id,trim,model,mileage,price FROM car WHERE name = 'رنو، تندر 90';"
+        )
     output = mycursor.fetchall()
     for i in output:
         id.append(i[0])
@@ -189,7 +201,10 @@ def l90():
             tr = 0
 
         # insert the cleaned data
-        mycursor.execute("INSERT INTO polls_l90_c (name, mileage, model, trim, price) VALUES ('رنو، تندر 90', '%s', '%s', '%s', '%s');" % ((int(ml)), (int(m[0][0]) - 1385) , int(tr) * 100, int(k[0][0].split(',')[0])))
+        mycursor.execute(
+            "INSERT INTO polls_l90_c (name, mileage, model, trim, price) VALUES ('رنو، تندر 90', '%s', '%s', '%s', '%s');"
+              % ((int(ml)), (int(m[0][0]) - 1385) , int(tr) * 100, int(k[0][0].split(',')[0]))
+              )
 
         mydb.commit()
 
@@ -336,8 +351,9 @@ def pride():
 
         # insert the cleaned data
         mycursor.execute(
-            "INSERT INTO polls_pride_c (name, mileage, model, trim, price) VALUES ('pride', '%s', '%s', '%s', '%s');" % (
-            (int(ml)), (int(m[0][0]) - 1372), int(tr) * 10, int(k[0][0].split(',')[0])))
+            "INSERT INTO polls_pride_c (name, mileage, model, trim, price) VALUES ('pride', '%s', '%s', '%s', '%s');"
+              %((int(ml)), (int(m[0][0]) - 1372), int(tr) * 10, int(k[0][0].split(',')[0]))
+            )
 
         mydb.commit()
 
