@@ -102,13 +102,11 @@ def m_pride(mile, mod, trim):
     model = RandomForestRegressor()
     model.fit(X, y)
     new = model.predict([[mile, mod, trim]])
-    # print(new)
     # Train the model
     model.fit(X_train, y_train)
 
     # Evaluate the model
     score = model.score(X_test, y_test)
-    # print('Model Accuracy:', score)
     ls.append(new[0])
     ls.append(score)
     return ls
