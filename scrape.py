@@ -14,9 +14,9 @@ from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-mydb = mysql.connector.connect(user='root', password='sh.bisto5',
+mydb = mysql.connector.connect(user='user', password='pass',
                                host='localhost',
-                               database='fin5_jadidb')
+                               database='db')
 mycursor = mydb.cursor()
 
 # scraping
