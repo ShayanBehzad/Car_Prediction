@@ -22,9 +22,9 @@ import mysql.connector
 
 
 
-mydb = mysql.connector.connect(user='root', password='sh.bisto5',
+mydb = mysql.connector.connect(user='user', password='pass',
                                host='localhost',
-                               database='fin5_jadidb')
+                               database='db')
 cursor = mydb.cursor()
 
 
