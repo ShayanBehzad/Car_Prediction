@@ -11,6 +11,7 @@ Welcome to our project, a cutting-edge application designed to predict the price
 ## Deployment
 
 The project is deployed using Nginx and Gunicorn for robust performance and scalability.
-Visit the project at [www.shayanbehzad.ir/car_prediction/](http://www.shayanbehzad.ir/car_prediction).
+Visit the project at [www.shayanbehzad.ir/car_prediction/](http://www.shayanbehzad.ir/car_prediction)
+
 Also explaiend Project in YouTube: https://www.youtube.com/watch?v=Iiv8YwjqKQU
 
