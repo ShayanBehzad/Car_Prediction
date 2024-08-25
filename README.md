@@ -8,7 +8,9 @@ Welcome to our project, a cutting-edge application designed to predict the price
 - Web Interface: A user-friendly website built with Django, allowing users to input car specifications and receive a price prediction instantly.
 
 
-## Can be experienced on: https://www.shayanbehzad.ir/car_prediction/
+## Deployment
 
-Explaiend Project in YouTube: https://www.youtube.com/watch?v=Iiv8YwjqKQU
+The project is deployed using Nginx and Gunicorn for robust performance and scalability.
+Visit the project at [www.shayanbehzad.ir/car_prediction/](http://www.shayanbehzad.ir/car_prediction).
+Also explaiend Project in YouTube: https://www.youtube.com/watch?v=Iiv8YwjqKQU
 
